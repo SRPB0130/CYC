@@ -10,11 +10,14 @@ public class CharacterBase : MonoBehaviour
 
     public float moveSpeed = 10f;
     public float jumpPower = 10f;
-    
+    public float crouchSpeed = 5f;
+
+    private float currentSpeed;
 
     int jumpCount;
 
 	public bool isJump = false;
+    
 
     private Vector3 lastPosition;
     
@@ -26,17 +29,18 @@ public class CharacterBase : MonoBehaviour
         spriterenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rigid.freezeRotation = true;
-        
+        currentSpeed = moveSpeed;
     }
 
     private void Update()
     {
+
         move();
         jump();
         Animation();
-
-
+ 
         lastPosition = transform.position;
+
     }
 
     void move()
@@ -51,6 +55,16 @@ public class CharacterBase : MonoBehaviour
         {
             spriterenderer.flipX = (Input.GetAxisRaw("Horizontal") == -1);
         }
+        //leftcontrol을 누르고 있으면 움직이지 않음
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            moveSpeed = 0f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            moveSpeed = 10f;
+        }
+
 
     }
     void jump()
@@ -76,6 +90,28 @@ public class CharacterBase : MonoBehaviour
         {
             animator.SetBool("isWalk", true);
         }
+
+        float differentY = Mathf.Abs(lastPosition.y - transform.position.y);
+        if(differentY < 0.05)
+        {
+            animator.SetBool("isJump", false);
+        }
+        else
+        {
+            animator.SetBool("isJump", true);
+        }
+        
+        if(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool("isCrouch", true);
+            
+        }
+        else
+        {
+            animator.SetBool("isCrouch", false);
+            
+        }
+
 
         //if (rigid.velocity.normalized.x == 0)
         //{            
