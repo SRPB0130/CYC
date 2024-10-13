@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace CYC
 {
-	public class InputSystem : MonoBehaviour
-	{
-
-
-	}
+    public class EnemyAttack : MonoBehaviour
+    {
+        public int damage = 20;
+        
+    }
 }

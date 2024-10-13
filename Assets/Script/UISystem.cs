@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UISystem : MonoBehaviour
+namespace CYC
 {
-    
+    public class UISystem : MonoBehaviour
+    {
+
+    }
 }
