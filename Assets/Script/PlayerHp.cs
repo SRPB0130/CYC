@@ -7,9 +7,12 @@ namespace CYC
     public class PlayerHp : MonoBehaviour
     {
         private SpriteRenderer spriterenderer;
+        Rigidbody2D rigid;
 
         public float MaxHp = 100f;
         public float currentHp;
+        
+
 
         private void Awake()
         {
@@ -35,13 +38,10 @@ namespace CYC
             {
                 Die();
             }
-        }
-        void OnDamage(Vector2 targePosition)
-        {
-            gameObject.layer = 9;
-            spriterenderer.color = new Color(1, 1, 1, 0.4f);
+
         }
 
+        
         void Die()
         {
             Debug.Log("Player has died.");
