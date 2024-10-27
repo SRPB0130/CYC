@@ -6,11 +6,14 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Wall
+  - Door
+  - ItemBox
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
   - Character

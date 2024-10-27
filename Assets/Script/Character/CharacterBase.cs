@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace CYC
 {
-    
 
     public class CharacterBase : MonoBehaviour
     {
@@ -13,6 +12,7 @@ namespace CYC
         private Rigidbody2D rigid;
         private SpriteRenderer spriterenderer;
         private Animator animator;
+        private PlayerHp playerHp;
 
         public float moveSpeed = 10f;
         public float jumpPower = 10f;
@@ -38,7 +38,8 @@ namespace CYC
             animator = GetComponent<Animator>();
             rigid.freezeRotation = true;
             currentSpeed = moveSpeed;
-            
+            playerHp = GetComponent<PlayerHp>(); // PlayerHealth ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿È
+
         }
 
         private void Update()
@@ -120,7 +121,8 @@ namespace CYC
                 animator.SetBool("isCrouch", false);
 
             }
-
+            
+            
 
             //if (rigid.velocity.normalized.x == 0)
             //{            

@@ -10,6 +10,8 @@ namespace CYC
         public float invincibilityDuration = 1f;  // 무적 시간
         private bool isInvincible = false;  // 무적 상태 여부
         private Rigidbody2D rb;
+       
+
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -24,19 +26,10 @@ namespace CYC
                 Vector2 knockbackDirection = -attackDirection.normalized;
                 rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
 
-                // 무적 상태로 전환 및 일정 시간 후 해제
-                StartCoroutine(InvincibilityCoroutine());
             }
         }
 
-        private IEnumerator InvincibilityCoroutine()
-        {
-            isInvincible = true;
-            yield return new WaitForSeconds(invincibilityDuration);
-            isInvincible = false;
-        }
-
-        // 충돌 체크 (적과의 충돌 시 데미지 입음)
+        // 충돌 체크 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Enemy"))
