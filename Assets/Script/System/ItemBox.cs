@@ -8,13 +8,13 @@ namespace CYC
     {
         public GameObject itemPrefab;
         public Transform spawnPoint;
-        private bool isOpen = false;
+        private bool isOpened = false;
 
         public void Interact()
         {
-            if (!isOpen)
+            if (!isOpened)
             {
-                isOpen = true; // 상자 상태를 열림으로 변경
+                isOpened = true; // 상자 상태를 열림으로 변경
                 Debug.Log("상자가 열렸습니다!");
 
                 // 아이템 생성
