@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cainos.LucidEditor;
-using CYC;
 
 
     namespace Cainos.PixelArtPlatformer_VillageProps
 {
         public class Chest : MonoBehaviour
     {
-
             public GameObject itemPrefab;
             public Transform spawnPoint;
 
@@ -32,10 +30,7 @@ using CYC;
             public void Open()
             {
                 IsOpened = true;
-                Debug.Log("상자가 열렸습니다!");
-
-                // 아이템 생성
-                Instantiate(itemPrefab, spawnPoint.position, Quaternion.identity);
+        
         }
 
             [FoldoutGroup("Runtime"), Button("Close"), HorizontalGroup("Runtime/Button")]

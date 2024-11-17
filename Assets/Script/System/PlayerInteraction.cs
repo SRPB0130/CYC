@@ -11,7 +11,6 @@ namespace CYC
 
         private void Update()
         {
-            
             if (Input.GetKeyDown(KeyCode.F)) // 'F' 키를 눌렀을 때 상호작용 시도
             {
                 Interact();
@@ -20,12 +19,24 @@ namespace CYC
 
         private void Interact()
         {
-            // 플레이어의 위치를 기준으로 상호작용할 객체 탐색
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, interactDistance, interactableLayer);
-            if (hit.collider != null)
+            // 왼쪽 방향으로 Raycast
+            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, interactDistance, interactableLayer);
+            // 오른쪽 방향으로 Raycast
+            RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, interactDistance, interactableLayer);
+
+            // 왼쪽 방향에서 상호작용 가능한 객체를 찾았다면
+            if (hitLeft.collider != null)
             {
-                // 상호작용할 객체가 있을 경우
-                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                IInteractable interactable = hitLeft.collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact(); // 상호작용 메서드 호출
+                }
+            }
+            // 오른쪽 방향에서 상호작용 가능한 객체를 찾았다면
+            else if (hitRight.collider != null)
+            {
+                IInteractable interactable = hitRight.collider.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
                     interactable.Interact(); // 상호작용 메서드 호출
