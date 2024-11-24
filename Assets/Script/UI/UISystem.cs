@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CYC
 {
-    public class UISystem : MonoBehaviour
+    public class UISystem : SingletonBase<UserDataModel>
     {
 
     }
