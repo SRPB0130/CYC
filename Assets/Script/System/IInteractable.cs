@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace CYC
 {
-        public interface IInteractable
-        {
-            void Interact();
-        }
+    public interface IInteractable
+    {
+
+        void Interact();
+    }
     
 }

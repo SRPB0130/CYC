@@ -4,31 +4,53 @@ using UnityEngine;
 
 namespace CYC
 {
-    public class PlayerAttacks : MonoBehaviour
+    public class PlayerAttack : MonoBehaviour
     {
-        [SerializeField] GameObject bulletPref;
+        public float attackRange = 10f;  // 공격 범위
+        public float attackCooldown = 1f;  // 공격 쿨타임
+        private float attackTimer = 0f;  // 공격 쿨타임 타이머
 
-        [SerializeField] private float firePower = 15f; // 발사 힘
-        [SerializeField] private float fireDelay = 0.1f; // 발사 딜레이
-        private float lastFireTime = 0; // 마지막 발사 시간
+        public GameObject projectilePrefab;  // 발사할 탄환 프리팹
+        public Transform attackPoint;  // 공격 위치 (보통 캐릭터 앞에 위치한 빈 오브젝트)
+        public KeyCode attackKey = KeyCode.Space;  // 공격 키 (기본: Space)
 
-
-        public void Fire()
+        void Update()
         {
+            // 공격 쿨타임 업데이트
+            attackTimer -= Time.deltaTime;
 
-            if (Time.time - lastFireTime >= fireDelay)
+            // 특정 키를 눌렀을 때 공격
+            if (attackTimer <= 0f && Input.GetKeyDown(attackKey))  // 지정한 키로 공격
             {
-                Vector3 direction = transform.right * transform.localScale.x; // 플레이어의 방향에 따라 발사 방향 결정
-                GameObject bullet = Instantiate(bulletPref, transform.position + direction, Quaternion.identity);
-
-                // 플레이어의 방향에 따른 투사체 스프라이트 스케일 반전
-                float bulletDirection = transform.localScale.x > 0 ? 1f : -1f;
-                bullet.transform.localScale = new Vector3(bulletDirection, 1f, 1f);
-
-                bullet.GetComponent<Rigidbody2D>().AddForce(direction * firePower, ForceMode2D.Impulse);
-
-                lastFireTime = Time.time; // 마지막 발사 시간 업데이트
+                Attack();
+                attackTimer = attackCooldown;  // 공격 후 쿨타임 설정
             }
         }
+
+        // 공격 함수
+        void Attack()
+        {
+            // 마우스 위치 계산
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;  // 2D 게임이므로 z 값을 0으로 고정
+
+            // 공격 방향 계산
+            Vector3 attackDirection = (mousePosition - attackPoint.position).normalized;
+
+            // 탄환 발사
+            ShootProjectile(attackDirection);
+        }
+
+        // 탄환 발사 함수
+        void ShootProjectile(Vector3 direction)
+        {
+            // 탄환 생성
+            GameObject projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
+
+            // 탄환의 방향 설정
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            rb.velocity = direction * 10f;  // 속도 설정 (10f는 탄환 속도)
+        }
+
     }
 }

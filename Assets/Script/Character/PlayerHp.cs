@@ -12,7 +12,7 @@ namespace CYC
         public float MaxHp = 100f; // 최대 HP
         public float currentHp; // 현재 HP
         public Image hpBar;
-        public TextMeshProUGUI hpText;
+        public Text hpText;
 
         private Animator animator;
 

@@ -47,7 +47,6 @@ namespace CYC
 
             Invoke("Think", 1);  
         }
-
         private bool IsGrounded()
         {
 

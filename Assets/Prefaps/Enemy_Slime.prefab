@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6203623728008360237}
   - component: {fileID: 1331951088172520932}
   - component: {fileID: 5178201007978790318}
-  - component: {fileID: 6519142418132128547}
   - component: {fileID: 7664977027557424982}
-  - component: {fileID: 8384290751200871143}
+  - component: {fileID: 2530541657362528310}
   m_Layer: 8
   m_Name: Enemy_Slime
   m_TagString: Enemy
@@ -155,23 +154,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28224653, y: 0.2278342}
   m_EdgeRadius: 0
---- !u!114 &6519142418132128547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551840331909180165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ca1e752001ee4498102af3b2646008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextMove: 0
-  GroundCheck: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!50 &7664977027557424982
 Rigidbody2D:
   serializedVersion: 4
@@ -180,7 +162,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551840331909180165}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -198,8 +180,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &8384290751200871143
+  m_Constraints: 4
+--- !u!114 &2530541657362528310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,8 +190,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1551840331909180165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a8c7d84f152d84d8554e49587e19f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d013cfc938cfb4408fae51a66c6b3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextMove: 0
+  GroundCheck: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   MaxHp: 100
   currentHp: 0

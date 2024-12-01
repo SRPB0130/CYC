@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace CYC
 {
@@ -17,19 +17,14 @@ namespace CYC
         public float moveSpeed = 10f;
         public float jumpPower = 10f;
         public float crouchSpeed = 5f;
-        
+        public float score = 0f;
+        public Text scoreText;
+
 
         private float currentSpeed;
-        
-
-
         int jumpCount;
-
         public bool isJump = false;
-
         private Vector3 lastPosition;
-
-
 
         private void Awake()
         {
@@ -39,12 +34,9 @@ namespace CYC
             rigid.freezeRotation = true;
             currentSpeed = moveSpeed;
             playerHp = GetComponent<PlayerHp>(); // PlayerHealth 컴포넌트를 가져옴
-
         }
-
         private void Update()
         {
-
             move();
             jump();
             Animation();
@@ -52,7 +44,10 @@ namespace CYC
             lastPosition = transform.position;
 
         }
-
+        private void Start()
+        {
+            UpdateScoreUI();
+        }
         void move()
         {
             float x = Input.GetAxisRaw("Horizontal");
@@ -74,8 +69,6 @@ namespace CYC
             {
                 moveSpeed = 10f;
             }
-
-
         }
         void jump()
         // 2단 점프
@@ -88,7 +81,6 @@ namespace CYC
                 jumpCount++;
             }
         }
-
         void Animation()
         {
             float differentX = Mathf.Abs(lastPosition.x - transform.position.x);
@@ -121,8 +113,6 @@ namespace CYC
                 animator.SetBool("isCrouch", false);
 
             }
-            
-            
 
             //if (rigid.velocity.normalized.x == 0)
             //{            
@@ -143,6 +133,17 @@ namespace CYC
             }
             
         }
-        
+        private void UpdateScoreUI()
+        {
+            if (scoreText != null)
+            {
+                scoreText.text = ": " + score.ToString(); 
+            }
+        }
+        public void IncreaseScore(int amount)
+        {
+            score += amount;
+            UpdateScoreUI(); 
+        }
     }
 }
